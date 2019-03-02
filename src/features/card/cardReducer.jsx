@@ -1,5 +1,5 @@
 import { createReducer } from '../../app/common/util/reducerUtil';
-import { CREATE_CARD, DELETE_EVENT, UPDATE_EVENT, FETCH_EVENTS } from './cardConstants';
+import { CREATE_CARD, DELETE_EVENT, UPDATE_EVENT, FETCH_CARDS } from './cardConstants';
 
  const initialState = [];
 
@@ -20,13 +20,13 @@ export const deleteEvent = (state, payload) => {
   ]
 }
 
-export const fetchEvents = (state, payload) => {
-  return payload.events
+export const fetchCards = (state, payload) => {
+  return payload.cards
 }
 
 export default createReducer(initialState, {
   [CREATE_CARD]: createCard,
   [UPDATE_EVENT]: updateEvent,
   [DELETE_EVENT]: deleteEvent,
-  [FETCH_EVENTS]: fetchEvents
+  [FETCH_CARDS]: fetchCards
 })

@@ -18,7 +18,7 @@ import {
   Icon,
   Divider
 } from "semantic-ui-react";
-import { createCard, updateEvent, cancelToggle } from "../cardActions";
+import { createCard } from "../cardActions";
 import TextInput from "../../../app/common/form/TextInput";
 import TextArea from "../../../app/common/form/TextArea";
 import SelectInput from "../../../app/common/form/SelectInput";
@@ -66,9 +66,7 @@ const mapState = (state, ownProps) => {
 };
 
 const actions = {
-  createCard,
-  updateEvent,
-  cancelToggle
+  createCard
 };
 
 const teams = [
@@ -118,13 +116,7 @@ const validate = combineValidators({
     message: "Please provide the player league of legends nickname"
   }),
   team: isRequired({ message: "Select the player team" }),
-  cardRarity: isRequired({ message: "Select the card rarity" }),
-  description: composeValidators(
-    isRequired({ message: "Please enter a description" }),
-    hasLengthGreaterThan(4)({
-      message: "Description needs to be at least 5 characters"
-    })
-  )()
+  cardRarity: isRequired({ message: "Select the card rarity" })
 });
 
 class PlayerCardForm extends Component {
@@ -198,7 +190,6 @@ class PlayerCardForm extends Component {
       submitting,
       pristine,
       event,
-      cancelToggle,
       loading
     } = this.props;
     return (
@@ -380,17 +371,7 @@ class PlayerCardForm extends Component {
               >
                 Cancel
               </Button>
-              {event && event.id && (
-                <Button
-                  onClick={() => cancelToggle(!event.cancelled, event.id)}
-                  type="button"
-                  color={event.cancelled ? "green" : "red"}
-                  floated="right"
-                  content={
-                    event.cancelled ? "Reactivate Event" : "Cancel Event"
-                  }
-                />
-              )}
+              
             </Form>
           </Segment>
         </Grid.Column>

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
 import { Route, Switch } from 'react-router-dom';
-import EventDashboard from '../../features/event/EventDashboard/EventDashboard';
+import CardDashboard from '../../features/card/CardDashboard/CardDashboard';
 import NavBar from '../../features/nav/NavBar/NavBar';
-import PlayerCardForm from '../../features/event/PlayerCardForm/PlayerCardForm';
+import PlayerCardForm from '../../features/card/PlayerCardForm/PlayerCardForm';
 import SettingsDashboard from '../../features/user/Settings/SettingsDashboard';
 import UserDetailedPage from '../../features/user/UserDetailed/UserDetailedPage';
 import PeopleDashboard from '../../features/user/PeopleDashboard/PeopleDashboard';
-import EventDetailedPage from '../../features/event/EventDetailed/EventDetailedPage';
 import NotFound from '../../app/layout/NotFound'
 import HomePage from '../../features/home/HomePage';
 import TestComponent from '../../features/testarea/TestComponent';
@@ -30,9 +29,8 @@ class App extends Component {
               <NavBar />
               <Container className="main">
                 <Switch>
-                  <Route path="/events" component={EventDashboard} />
+                  <Route path="/cards" component={CardDashboard} />
                   <Route path="/test" component={TestComponent} />
-                  <Route path="/event/:id" component={EventDetailedPage} />
                   <Route path="/manage/:id" component={UserIsAuthenticated(PlayerCardForm)} />
                   <Route path="/people" component={UserIsAuthenticated(PeopleDashboard)} />
                   <Route path="/profile/:id" component={UserIsAuthenticated(UserDetailedPage)} />

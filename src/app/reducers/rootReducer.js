@@ -4,7 +4,7 @@ import {reducer as toastrReducer} from 'react-redux-toastr';
 import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore'
 import testReducer from '../../features/testarea/testReducer';
-import cardReducer from '../../features/event/cardReducer';
+import cardReducer from '../../features/card/cardReducer';
 import modalsReducer from '../../features/modals/modalReducer';
 import authReducer from '../../features/auth/authReducer';
 import asyncReducer from '../../features/async/asyncReducer';
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   test: testReducer,
-  events: cardReducer,
+  cards: cardReducer,
   form: FormReducer,
   modals: modalsReducer,
   auth: authReducer,

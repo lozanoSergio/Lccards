@@ -7,7 +7,7 @@ import {
   asyncActionFinish
 } from "../async/asyncActions";
 import firebase from "../../app/config/firebaseConfig";
-import { FETCH_EVENTS } from "../event/cardConstants";
+//import { FETCH_EVENTS } from "../card/cardConstants";
 
 export const updateProfile = user => async (
   dispatch,
@@ -250,7 +250,7 @@ export const getUserEvents = (userUid, activeTab) => async (
       events.push({ ...evt.data(), id: evt.id });
     }
 
-    dispatch({ type: FETCH_EVENTS, payload: { events } });
+    //dispatch({ type: FETCH_EVENTS, payload: { events } });
 
     dispatch(asyncActionFinish());
   } catch (error) {
