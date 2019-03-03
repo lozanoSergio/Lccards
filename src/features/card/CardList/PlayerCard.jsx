@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Image, Label } from "semantic-ui-react";
+import { rarityColors } from '../../../app/common/util/helpers'
 
 const textStyle = {
   color: 'white', 
@@ -15,24 +16,29 @@ const textStyle2 = {
 }
 
 const PlayerCard = ({ card }) => {
+  
+  let cardColors = rarityColors(card.rarity);
+  let color = cardColors.color
+  let cardColor = cardColors.cardColor
+      
   return (
     <Card
       style={{
         backgroundColor: "#0e0a13",
-        boxShadow: "0 1px 3px 0 #121246, 0 0 0 1px #45454c"
+        boxShadow: `0 1px 3px 0 ${color}, 0 0 0 1px ${color}`
       }}
     >
     
       <Card.Content
         textAlign="center"
         style={{
-          borderBottom: "1px solid #492870",
-          background: "linear-gradient(to bottom, #7d49c9, #534080)",
+          borderBottom: `1px solid ${color}`,
+          background: cardColor,
           maxHeight: "48px"
         }}
       >
       <Label color='blue' floating circular>
-        22
+        +9
       </Label>
         <Card.Header content={card.nickname} style={{ color: "white" }} />
       </Card.Content>
@@ -40,7 +46,7 @@ const PlayerCard = ({ card }) => {
       <Card.Content
         extra
         textAlign="center"
-        style={{ background: "linear-gradient(to bottom, #7d49c9, #534080)" }}
+        style={{ background: cardColor }}
       >
       <div>
         <Image src={'/assets/icons/swords_white.png'} width={'16px'} verticalAlign='bottom' style={{marginBottom: '5px'}}/>

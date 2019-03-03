@@ -26,6 +26,7 @@ import RadioInput from "../../../app/common/form/RadioInput";
 import PlaceInput from "../../../app/common/form/PlaceInput";
 import DateInput from "../../../app/common/form/DateInput";
 import Dropzone from "react-dropzone";
+import { rarity } from '../../../app/common/data/common'
 
 const baseStyle = {
   width: 260,
@@ -82,12 +83,7 @@ const teams = [
   { key: "excelesports", text: "EXCEL ESPORTS", value: "excelesports" }
 ];
 
-const cardRarity = [
-  { key: "common", text: "Common", value: "common" },
-  { key: "rare", text: "Rare", value: "rare" },
-  { key: "epic", text: "Epic", value: "epic" },
-  { key: "legendary", text: "Legendary", value: "legendary" }
-];
+const cardRarity = rarity
 
 // const playerPosition = [
 //   { key: "top", text: "Top", value: "top" },

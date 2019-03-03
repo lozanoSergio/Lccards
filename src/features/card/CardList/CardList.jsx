@@ -1,34 +1,20 @@
-import React from 'react'
-import { Card, Tab, Divider } from 'semantic-ui-react'
-import PlayerCard from './PlayerCard'
+import React from "react";
+import { Card, Tab, Segment, Select, Grid } from "semantic-ui-react";
+import PlayerCard from "./PlayerCard";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 
-const panes = [
-  {menuItem: 'All', pane: {key: 'allEvents'}},
-  {menuItem: 'Top', pane: {key: 'pastEvents'}},
-  {menuItem: 'Jungle', pane: {key: 'futureEvents'}},
-  {menuItem: 'Mid', pane: {key: 'hosted'}},
-  {menuItem: 'Bottom', pane: {key: 'hosted'}},
-  {menuItem: 'Support', pane: {key: 'hosted'}}
-]
-
-const CardList = ({cards, changeTab}) => {
-    return (
-      <div>
-      <Tab onTabChange={(e, data) => changeTab(e, data)} menu={{ inverted: true, secondary: true, pointing: true }} panes={panes} />
-      <br />
-       <Card.Group itemsPerRow={4}>
-       {cards && cards.map(card => (
-        <PlayerCard 
-            key={card.id}
-            card={card}
-        />
-        ))}
+const CardList = ({ cards, changeTab, loading }) => {
+  return (
+    <div>
+      <Segment style={{ backgroundColor: "initial", border: "0px" }}>
+        {loading && <LoadingComponent />}
+        <Card.Group itemsPerRow={4}>
+          {cards && cards.map(card => <PlayerCard key={card.id} card={card} />)}
         </Card.Group>
-      </div>
-    )
-  }
+      </Segment>
+    </div>
+  );
+};
 
-
-
-export default CardList
+export default CardList;
