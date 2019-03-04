@@ -1,4 +1,5 @@
 export const rarity = [
+  { key: "all", text: "All", value: "all" },
   { key: "common", text: "Common", value: "common" },
   { key: "rare", text: "Rare", value: "rare" },
   { key: "epic", text: "Epic", value: "epic" },

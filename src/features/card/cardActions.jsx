@@ -40,46 +40,14 @@ export const createCard = (card, image, imageName) => {
   };
 };
 
-export const getCardsByRole = activeTab => async (dispatch, getState) => {
+export const getAllCards = () => async (dispatch, getState) => {
   dispatch(asyncActionStart());
   const firestore = firebase.firestore();
   let cardsRef = firestore.collection("cards");
-  let query;
-  switch (activeTab) {
-    case 1: // top
-      query = cardsRef
-        .where("role", "==", "top")
-        .orderBy("created", "desc");
-      break;
-    case 2: // jungler
-      query = cardsRef
-        .where("role", "==", "jungler")
-        .orderBy("created", "desc");
-      break;
-    case 3: // mid
-      query = cardsRef
-        .where("role", "==", "mid")
-        .orderBy("created", "desc");
-      break;
-    case 4: // bottom
-      query = cardsRef
-        .where("role", "==", "bottom")
-        .orderBy("created", "desc");
-      break;
-    case 5: // support
-      query = cardsRef
-        .where("role", "==", "support")
-        .orderBy("created", "desc");
-      break;
-    default:
-      query = cardsRef
-        .orderBy("created", "desc");
-  }
-  try {
-    let querySnap = await query.get();
-    let cards = [];
 
-    
+  try {
+    let querySnap = await cardsRef.orderBy("created", "desc").get();
+    let cards = [];
 
     for (let i = 0; i < querySnap.docs.length; i++) {
       let card = await firestore
@@ -88,8 +56,76 @@ export const getCardsByRole = activeTab => async (dispatch, getState) => {
         .get();
       cards.push({ ...card.data(), id: card.id });
     }
+    dispatch({ type: FETCH_CARDS, payload: { cards } });
 
-    console.log(cards)
+    dispatch(asyncActionFinish());
+  } catch (error) {
+    console.log(error);
+    dispatch(asyncActionError());
+  }
+};
+
+export const getUserCards = () => async (dispatch, getState) => {
+  const firestore = firebase.firestore();
+  const user = firebase.auth().currentUser;
+
+  let userRef = firestore
+    .collection("users")
+    .doc(user.uid)
+    .collection("cards");
+
+  try {
+    let querySnap = await userRef.get();
+    let userCards = [];
+    for (let i = 0; i < querySnap.docs.length; i++) {
+      let card = { ...querySnap.docs[i].data() };
+      userCards.push(card.cardId);
+    }
+    return userCards;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCardsByRole = role => async (dispatch, getState) => {
+  dispatch(asyncActionStart());
+  const firestore = firebase.firestore();
+  let cardsRef = firestore.collection("cards");
+  let query;
+  switch (role) {
+    case 1: // top
+      query = cardsRef.where("role", "==", "top").orderBy("created", "desc");
+      break;
+    case 2: // jungler
+      query = cardsRef
+        .where("role", "==", "jungler")
+        .orderBy("created", "desc");
+      break;
+    case 3: // mid
+      query = cardsRef.where("role", "==", "mid").orderBy("created", "desc");
+      break;
+    case 4: // bottom
+      query = cardsRef.where("role", "==", "bottom").orderBy("created", "desc");
+      break;
+    case 5: // support
+      query = cardsRef
+        .where("role", "==", "support")
+        .orderBy("created", "desc");
+      break;
+    default:
+      query = cardsRef.orderBy("created", "desc");
+  }
+  try {
+    let querySnap = await query.get();
+    let cards = [];
+
+    for (let i = 0; i < querySnap.docs.length; i++) {
+      let card = await firestore
+        .collection("cards")
+        .doc(querySnap.docs[i].id)
+        .get();
+      cards.push({ ...card.data(), id: card.id });
+    }
 
     dispatch({ type: FETCH_CARDS, payload: { cards } });
 

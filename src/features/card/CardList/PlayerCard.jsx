@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Image, Label } from "semantic-ui-react";
-import { rarityColors } from '../../../app/common/util/helpers'
+import { rarityColors } from '../../../app/common/util/helpers';
 
 const textStyle = {
   color: 'white', 

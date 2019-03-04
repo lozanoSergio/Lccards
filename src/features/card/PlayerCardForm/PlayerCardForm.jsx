@@ -3,10 +3,8 @@ import { connect } from "react-redux";
 import { withFirestore } from "react-redux-firebase";
 import { reduxForm, Field } from "redux-form";
 import {
-  composeValidators,
   combineValidators,
-  isRequired,
-  hasLengthGreaterThan
+  isRequired
 } from "revalidate";
 import {
   Segment,
@@ -185,7 +183,6 @@ class PlayerCardForm extends Component {
       invalid,
       submitting,
       pristine,
-      event,
       loading
     } = this.props;
     return (

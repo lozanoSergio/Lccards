@@ -1,33 +1,71 @@
 import React, { Component } from "react";
-import { Grid, Segment, Tab, Select } from "semantic-ui-react";
+import { Grid, Tab, Select } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
 import CardList from "../CardList/CardList";
-import { getCardsByRole } from "../cardActions";
+import { getAllCards, getUserCards } from "../cardActions";
 import { roles, rarity } from "../../../app/common/data/common";
 
 const panes = roles;
 
 const mapState = state => ({
   loading: state.async.loading,
-  cards: state.cards
+  initialCards: state.cards
 });
 
 const actions = {
-  getCardsByRole
+  getAllCards,
+  getUserCards
 };
 
 class CardDashboard extends Component {
+  state = {
+    cards: [],
+    userCards: []
+  };
+
   async componentDidMount() {
-    await this.props.getCardsByRole(0);
+    await this.props.getAllCards();
+
+    let userCardsIds = await this.props.getUserCards();
+    let allCards = this.props.initialCards;
+
+    let filteredCards = allCards.filter((e) => {
+      return userCardsIds.indexOf(e.id) !== -1
+    })
+
+    this.setState({
+      cards: allCards,
+      userCards: filteredCards
+    });
   }
 
   changeTab = (e, data) => {
     this.props.getCardsByRole(data.activeIndex);
+    this.setState({});
+  };
+
+  onChange = (e, data) => {
+    let filteredCards = this.props.initialCards;
+    let cardsArr = [];
+    if (data.value !== "all" && filteredCards) {
+      filteredCards.filter(filteredCard => {
+        if (filteredCard.rarity === data.value) {
+          cardsArr.push(filteredCard);
+        }
+        return cardsArr;
+      });
+      this.setState({
+        cards: cardsArr
+      });
+    } else {
+      this.setState({
+        cards: this.props.initialCards
+      });
+    }
   };
 
   render() {
-    const { cards, loading } = this.props;
+    const { loading } = this.props;
 
     return (
       <div>
@@ -40,13 +78,17 @@ class CardDashboard extends Component {
             />
           </Grid.Column>
           <Grid.Column>
-            <Select placeholder="Rarity" options={rarity} />
+            <Select
+              placeholder="Rarity"
+              options={rarity}
+              onChange={(e, data) => this.onChange(e, data)}
+            />
           </Grid.Column>
         </Grid>
         <Grid>
           <Grid.Column width={12}>
             <CardList
-              cards={cards}
+              cards={this.state.userCards}
               changeTab={this.changeTab}
               loading={loading}
             />
