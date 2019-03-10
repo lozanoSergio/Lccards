@@ -93,6 +93,9 @@ class CardDashboard extends Component {
               loading={loading}
             />
           </Grid.Column>
+          <Grid.Column width={4}>
+            <div style={{backgroundColor: 'white'}}>Card recycler</div>
+          </Grid.Column>
         </Grid>
       </div>
     );

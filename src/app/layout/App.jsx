@@ -6,7 +6,7 @@ import NavBar from '../../features/nav/NavBar/NavBar';
 import PlayerCardForm from '../../features/card/PlayerCardForm/PlayerCardForm';
 import SettingsDashboard from '../../features/user/Settings/SettingsDashboard';
 import UserDetailedPage from '../../features/user/UserDetailed/UserDetailedPage';
-import PeopleDashboard from '../../features/user/PeopleDashboard/PeopleDashboard';
+import LootDashboard from '../../features/card/CardOpenings/LootDashboard';
 import NotFound from '../../app/layout/NotFound'
 import HomePage from '../../features/home/HomePage';
 import TestComponent from '../../features/testarea/TestComponent';
@@ -27,12 +27,12 @@ class App extends Component {
           render={() => (
             <div>
               <NavBar />
-              <Container className="main">
+              <Container className="main" fluid>
                 <Switch>
                   <Route path="/cards" component={CardDashboard} />
                   <Route path="/test" component={TestComponent} />
                   <Route path="/manage/:id" component={UserIsAuthenticated(PlayerCardForm)} />
-                  <Route path="/people" component={UserIsAuthenticated(PeopleDashboard)} />
+                  <Route path="/loot" component={UserIsAuthenticated(LootDashboard)} />
                   <Route path="/profile/:id" component={UserIsAuthenticated(UserDetailedPage)} />
                   <Route path="/settings" component={UserIsAuthenticated(SettingsDashboard)} />
                   <Route path="/create-card" component={UserIsAuthenticated(PlayerCardForm)} />

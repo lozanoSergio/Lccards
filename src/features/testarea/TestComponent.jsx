@@ -10,6 +10,7 @@ import PlacesAutocomplete, {
 import { incrementAsync, decrementAsync, testPermission } from "./testActions";
 import { openModal } from "../modals/modalActions";
 import CardFlip from "../card/CardOpenings/CardFlip";
+import LootHolder from '../card/CardOpenings/LootHolder'
 
 const mapState = state => ({
   data: state.test.data,
@@ -102,8 +103,9 @@ class TestComponent extends Component {
           )}
           <button type="submit">Submit</button>
         </form>
-
+          <br />
         <CardFlip />
+        <LootHolder />
       </div>
     );
   }

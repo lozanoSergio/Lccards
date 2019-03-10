@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withFirebase } from 'react-redux-firebase'
-import { Menu, Container, Button } from 'semantic-ui-react';
+import { Menu, Button } from 'semantic-ui-react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import SignedOutMenu from '../Menus/SignedOutMenu';
 import SignedInMenu from '../Menus/SignedInMenu';
@@ -36,7 +36,7 @@ class NavBar extends Component {
     const authenticated = auth.isLoaded && !auth.isEmpty
     return (
       <Menu inverted fixed="top">
-        <Container>
+
           <Menu.Item as={Link} to="/" header>
             <img src="/assets/logo.png" alt="logo" />
             LC-Cards
@@ -44,7 +44,7 @@ class NavBar extends Component {
           <Menu.Item as={NavLink} to="/cards" name="Cards" />
           <Menu.Item as={NavLink} to="/test" name="Test" />
           {authenticated &&
-          <Menu.Item as={NavLink} to="/people" name="People" />}
+          <Menu.Item as={NavLink} to="/loot" name="Loot" />}
 
           {authenticated &&
           <Menu.Item>
@@ -62,7 +62,7 @@ class NavBar extends Component {
           ) : (
             <SignedOutMenu register={this.handleRegister} signIn={this.handleSignIn} />
           )}
-        </Container>
+
       </Menu>
     );
   }
