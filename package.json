@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "animejs": "^3.0.1",
+    "arwes": "^1.0.0-alpha.5",
     "classnames": "^2.2.6",
     "cuid": "^2.1.5",
     "date-fns": "^1.29.0",

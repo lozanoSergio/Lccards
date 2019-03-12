@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {Image, Button} from 'semantic-ui-react'
 
 const Container = styled.div`
   padding-top: 20px;
@@ -21,44 +22,21 @@ const BackgroundImg = styled.div`
 `;
 
 const Box = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: inherit;
+  margin-top: 10%;
+  margin-right: auto;
+  margin-left: auto;
   width: 300px;
-  height: 300px;
-  background: #111845a6;
-  box-sizing: border-box;
+  height: 400px;
+  background: #2E294E;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgb(23, 32, 90);
-  border: 2px solid #2a3cad;
+  border: 2px solid #D499B9;
   color: white;
   padding: 20px;
 
-  :before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    transition: 0.5s;
-    pointer-events: none;
-  }
-  :hover:before {
-    left: -50%;
-    transform: skewX(-5deg);
-  }
-
   .content {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-    border: 1px solid #f0a591;
-    padding: 20px;
+    border: 1px solid #D499B9;
+    height: 100%;
     text-align: center;
     box-shadow: 0 5px 10px rgba(9, 0, 0, 0.5);
   }
@@ -78,6 +56,12 @@ const Box = styled.div`
 
   span:nth-child(2) {
     transform: rotate(90deg);
+    height: 290px;
+    width: 400px;
+    top: 52px;
+    left: -50px;
+    bottom: 0;
+    right: 0;
   }
 
   span:nth-child(3) {
@@ -86,6 +70,12 @@ const Box = styled.div`
 
   span:nth-child(4) {
     transform: rotate(270deg);
+    height: 290px;
+    width: 400px;
+    top: 52px;
+    left: -55px;
+    bottom: 0;
+    right: 0;
   }
 
   span:before {
@@ -93,7 +83,7 @@ const Box = styled.div`
     position: absolute;
     width: 100%;
     height: 2px;
-    background: #50dfdb;
+    background: #9055A2;
     animation: animate 4s linear infinite;
   }
 
@@ -122,7 +112,7 @@ const Box = styled.div`
     }
 `;
 
-const LootHolder = () => {
+const LootHolder = ({visible}) => {
   return (
 
         <Box>
@@ -131,10 +121,20 @@ const LootHolder = () => {
           <span />
           <span />
           <div className="content">
-
+          {visible && 
+            <Image
+            src="/assets/card_back_grey.png"
+            draggable={false}
+          />
+          }
+          {!visible &&
+          <Image
+                src="/assets/card_back.png"
+                draggable={false}
+              />}
           </div>
         </Box>
-
+        
   );
 };
 
